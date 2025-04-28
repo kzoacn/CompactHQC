@@ -104,9 +104,9 @@ void hqc_public_key_from_string(uint64_t *h, uint64_t *s, const uint8_t *pk) {
  * @param[in] salt String containing a salt
  */
 void hqc_ciphertext_to_string(uint8_t *ct, const uint64_t *u, const uint64_t *v, const uint64_t *salt) {
-    memcpy(ct, u, VEC_N_SIZE_BYTES);
-    memcpy(ct + VEC_N_SIZE_BYTES, v, VEC_N1N2_SIZE_BYTES);
-    memcpy(ct + VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES, salt, SALT_SIZE_BYTES);
+    memcpy(ct, u, COMPRESSED_VEC_N_SIZE_BYTES);
+    memcpy(ct + COMPRESSED_VEC_N_SIZE_BYTES, v, COMPRESSED_VEC_N1N2_SIZE_BYTES);
+    memcpy(ct + COMPRESSED_VEC_N_SIZE_BYTES + COMPRESSED_VEC_N1N2_SIZE_BYTES, salt, SALT_SIZE_BYTES);
 }
 
 
@@ -122,7 +122,7 @@ void hqc_ciphertext_to_string(uint8_t *ct, const uint64_t *u, const uint64_t *v,
  * @param[in] ct String containing the ciphertext
  */
 void hqc_ciphertext_from_string(uint64_t *u, uint64_t *v, uint64_t *salt, const uint8_t *ct) {
-    memcpy(u, ct, VEC_N_SIZE_BYTES);
-    memcpy(v, ct + VEC_N_SIZE_BYTES, VEC_N1N2_SIZE_BYTES);
-    memcpy(salt, ct + VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES, SALT_SIZE_BYTES);
+    memcpy(u, ct, COMPRESSED_VEC_N_SIZE_BYTES);
+    memcpy(v, ct + COMPRESSED_VEC_N_SIZE_BYTES, COMPRESSED_VEC_N1N2_SIZE_BYTES);
+    memcpy(salt, ct + COMPRESSED_VEC_N_SIZE_BYTES + COMPRESSED_VEC_N1N2_SIZE_BYTES, SALT_SIZE_BYTES);
 }

@@ -87,13 +87,17 @@ void hqc_pke_keygen(unsigned char* pk, unsigned char* sk) {
  * @param[in] theta Seed used to derive randomness required for encryption
  * @param[in] pk String containing the public key
  */
-void hqc_pke_encrypt(uint64_t *u, uint64_t *v, uint64_t *m, unsigned char *theta, const unsigned char *pk) {
+void hqc_pke_encrypt(uint64_t *compressed_u, uint64_t *compressed_v, uint64_t *m, unsigned char *theta, const unsigned char *pk) {
     seedexpander_state seedexpander;
+
+    uint64_t u[VEC_N_SIZE_64] = {0};
+    uint64_t v[VEC_N1N2_SIZE_64] = {0};
+
     uint64_t h[VEC_N_SIZE_64] = {0};
     uint64_t s[VEC_N_SIZE_64] = {0};
-    uint64_t r1[VEC_N_SIZE_64] = {0};
+    //uint64_t r1[VEC_N_SIZE_64] = {0};
     uint64_t r2[VEC_N_SIZE_64] = {0};
-    uint64_t e[VEC_N_SIZE_64] = {0};
+    //uint64_t e[VEC_N_SIZE_64] = {0};
     uint64_t tmp1[VEC_N_SIZE_64] = {0};
     uint64_t tmp2[VEC_N_SIZE_64] = {0};
 
@@ -105,12 +109,17 @@ void hqc_pke_encrypt(uint64_t *u, uint64_t *v, uint64_t *m, unsigned char *theta
 
     // Generate r1, r2 and e
     vect_set_random_fixed_weight(&seedexpander, r2, PARAM_OMEGA_R);
-    vect_set_random_fixed_weight(&seedexpander, e, PARAM_OMEGA_E);
-    vect_set_random_fixed_weight(&seedexpander, r1, PARAM_OMEGA_R);
+    //vect_set_random_fixed_weight(&seedexpander, e, PARAM_OMEGA_E);
+    //vect_set_random_fixed_weight(&seedexpander, r1, PARAM_OMEGA_R);
 
     // Compute u = r1 + r2.h
     vect_mul(u, r2, h);
-    vect_add(u, r1, u, VEC_N_SIZE_64);
+
+    compress(u,COMPRESSED_VEC_N_SIZE_64,u,VEC_N_SIZE_64);
+    //vect_add(u, r1, u, VEC_N_SIZE_64);
+    //for(int i=0;i+4<VEC_N_SIZE_64;i+=4)
+    //    hamming255_decode_to_code(u+i,u+i);
+    
 
     // Compute v = m.G by encoding the message
     code_encode(v, m);
@@ -118,9 +127,15 @@ void hqc_pke_encrypt(uint64_t *u, uint64_t *v, uint64_t *m, unsigned char *theta
 
     // Compute v = m.G + s.r2 + e
     vect_mul(tmp2, r2, s);
-    vect_add(tmp2, e, tmp2, VEC_N_SIZE_64);
+    //vect_add(tmp2, e, tmp2, VEC_N_SIZE_64);
+
     vect_add(tmp2, tmp1, tmp2, VEC_N_SIZE_64);
     vect_resize(v, PARAM_N1N2, tmp2, PARAM_N);
+
+    compress(v,COMPRESSED_VEC_N1N2_SIZE_64,v,VEC_N1N2_SIZE_64);
+
+    memcpy(compressed_u,u,COMPRESSED_VEC_N_SIZE_BYTES);
+    memcpy(compressed_v,v,COMPRESSED_VEC_N1N2_SIZE_BYTES);
 
     #ifdef VERBOSE
         printf("\n\nh: "); vect_print(h, VEC_N_SIZE_BYTES);
@@ -155,9 +170,15 @@ uint8_t hqc_pke_decrypt(uint64_t *m, uint8_t *sigma, const uint64_t *u, const ui
     // Retrieve x, y, pk from secret key
     hqc_secret_key_from_string(y, sigma, pk, sk);
 
+    uint64_t decompressed_u[VEC_N_SIZE_64] = {0};
+    decompress(decompressed_u,VEC_N_SIZE_64,u,COMPRESSED_VEC_N_SIZE_64);
+
+    uint64_t decompressed_v[VEC_N1N2_SIZE_64] = {0};
+    decompress(decompressed_v,VEC_N1N2_SIZE_64,v,COMPRESSED_VEC_N1N2_SIZE_64);
+
     // Compute v - u.y
-    vect_resize(tmp1, PARAM_N, v, PARAM_N1N2);
-    vect_mul(tmp2, y, u);
+    vect_resize(tmp1, PARAM_N, decompressed_v, PARAM_N1N2);
+    vect_mul(tmp2, y, decompressed_u);
     vect_add(tmp2, tmp1, tmp2, VEC_N_SIZE_64);
 
     #ifdef VERBOSE

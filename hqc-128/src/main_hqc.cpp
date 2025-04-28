@@ -36,5 +36,13 @@ int main() {
 	for(int i = 0 ; i < SHARED_SECRET_BYTES ; ++i) printf("%x", key2[i]);
 	printf("\n\n");
 
+
+	for(int i = 0 ; i < SHARED_SECRET_BYTES ; ++i)
+	 if(key1[i]!=key2[i]){
+		puts("NO!!!!!!!!!!!!!!!");
+		return 0;
+	 }
+	 puts("YES");
+
 	return 0;
 }

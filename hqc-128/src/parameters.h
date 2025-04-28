@@ -87,6 +87,11 @@
 #define VEC_N1_SIZE_64                        CEIL_DIVIDE(PARAM_N1, 8)
 #define VEC_N1N2_SIZE_64                      CEIL_DIVIDE(PARAM_N1N2, 64)
 
+#define COMPRESSED_VEC_N_SIZE_64              CEIL_DIVIDE(VEC_N_SIZE_64*248, 256)
+#define COMPRESSED_VEC_N1N2_SIZE_64           CEIL_DIVIDE(VEC_N1N2_SIZE_64*248, 256)
+#define COMPRESSED_VEC_N_SIZE_BYTES           (COMPRESSED_VEC_N_SIZE_64*8)
+#define COMPRESSED_VEC_N1N2_SIZE_BYTES        (COMPRESSED_VEC_N1N2_SIZE_64*8)
+
 #define PARAM_DELTA                           15
 #define PARAM_M                               8
 #define PARAM_GF_POLY                         0x11D
