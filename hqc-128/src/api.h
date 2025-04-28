@@ -11,8 +11,7 @@
 #define CRYPTO_SECRETKEYBYTES               2305
 #define CRYPTO_PUBLICKEYBYTES               2249
 #define CRYPTO_BYTES                        64
-#define CRYPTO_CIPHERTEXTBYTES              4433
-
+#define CRYPTO_CIPHERTEXTBYTES              4312
 // As a technicality, the public key is appended to the secret key in order to respect the NIST API.
 // Without this constraint, CRYPTO_SECRETKEYBYTES would be defined as 32
 

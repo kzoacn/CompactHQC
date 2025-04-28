@@ -44,5 +44,7 @@ int main() {
 	 }
 	 puts("YES");
 
+	 printf("CIPHER SIZE = %d\n",COMPRESSED_VEC_N_SIZE_BYTES + COMPRESSED_VEC_N1N2_SIZE_BYTES+ SALT_SIZE_BYTES);
+
 	return 0;
 }
