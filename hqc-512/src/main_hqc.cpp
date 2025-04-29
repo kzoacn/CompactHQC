@@ -38,9 +38,9 @@ int main() {
 	for(int i = 0 ; i < SHARED_SECRET_BYTES ; ++i) printf("%x", key2[i]);
 	printf("\n\n");
 
-	printf("pk size %d\n",SEED_BYTES + VEC_N_SIZE_BYTES);
-	printf("sk size %d\n",SEED_BYTES + PARAM_SECURITY_BYTES + (SEED_BYTES + VEC_N_SIZE_BYTES));
-	printf("ct size %d\n",VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES + SALT_SIZE_BYTES);
+	//printf("pk size %d\n",SEED_BYTES + VEC_N_SIZE_BYTES);
+	//printf("sk size %d\n",SEED_BYTES + PARAM_SECURITY_BYTES + (SEED_BYTES + VEC_N_SIZE_BYTES));
+	//printf("ct size %d\n",VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES + SALT_SIZE_BYTES);
 	
 
 	for(int i = 0 ; i < SHARED_SECRET_BYTES ; ++i) 
