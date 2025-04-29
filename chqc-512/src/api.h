@@ -8,7 +8,7 @@
 
 #include "parameters.h"
 
-#define CRYPTO_ALGNAME                      "HQC-256"
+#define CRYPTO_ALGNAME                      "CHQC-512"
 
 //#define CRYPTO_SECRETKEYBYTES               7317
 //#define CRYPTO_PUBLICKEYBYTES               7245

@@ -13,11 +13,11 @@ SRC:=$(ROOT)/src/
 INCLUDE:=-I $(ROOT)/src -lntl -lgf2x -lgmp -pthread
 LIB:=$(SHA3_INCLUDE)
 
-MAIN_HQC:=$(ROOT)/src/main_hqc.cpp
+MAIN_CHQC:=$(ROOT)/src/main_chqc.cpp
 MAIN_KAT:=$(ROOT)/src/main_kat.c
 
-HQC_OBJS:=vector.o reed_muller.o reed_solomon.o fft.o gf.o gf2x.o code.o parsing.o hqc.o kem.o shake_ds.o shake_prng.o
-HQC_OBJS_VERBOSE:=vector.o reed_muller.o reed_solomon-verbose.o fft.o gf.o gf2x.o code-verbose.o parsing.o hqc-verbose.o kem-verbose.o shake_ds.o shake_prng.o
+CHQC_OBJS:=vector.o reed_muller.o reed_solomon.o fft.o gf.o gf2x.o code.o parsing.o chqc.o kem.o shake_ds.o shake_prng.o
+CHQC_OBJS_VERBOSE:=vector.o reed_muller.o reed_solomon-verbose.o fft.o gf.o gf2x.o code-verbose.o parsing.o chqc-verbose.o kem-verbose.o shake_ds.o shake_prng.o
 LIB_OBJS:= fips202.o
 
 BIN:=bin
@@ -40,17 +40,17 @@ fips202.o: | folders
 	@echo -e "\n### Compiling $@ (verbose mode)\n"
 	$(CPP) $(CPP_FLAGS) -c $< $(INCLUDE) $(LIB) -D VERBOSE -o $(BUILD)/$@
 
-hqc-512: $(HQC_OBJS) $(LIB_OBJS) | folders
-	@echo -e "\n### Compiling hqc-512\n"
-	$(CPP) $(CPP_FLAGS) $(MAIN_HQC) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -o $(BIN)/$@
+chqc-512: $(CHQC_OBJS) $(LIB_OBJS) | folders
+	@echo -e "\n### Compiling chqc-512\n"
+	$(CPP) $(CPP_FLAGS) $(MAIN_CHQC) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -o $(BIN)/$@
 
-hqc-512-kat: $(HQC_OBJS) $(LIB_OBJS) | folders
-	@echo -e "\n### Compiling hqc-512 KAT\n"
+chqc-512-kat: $(CHQC_OBJS) $(LIB_OBJS) | folders
+	@echo -e "\n### Compiling chqc-512 KAT\n"
 	$(CPP) $(CPP_FLAGS) $(MAIN_KAT) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -o $(BIN)/$@
 
-hqc-512-verbose: $(HQC_OBJS_VERBOSE) $(LIB_OBJS) | folders
-	@echo -e "\n### Compiling hqc-512 (verbose mode)\n"
-	$(CPP) $(CPP_FLAGS) $(MAIN_HQC) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -D VERBOSE -o $(BIN)/$@
+chqc-512-verbose: $(CHQC_OBJS_VERBOSE) $(LIB_OBJS) | folders
+	@echo -e "\n### Compiling chqc-512 (verbose mode)\n"
+	$(CPP) $(CPP_FLAGS) $(MAIN_CHQC) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -D VERBOSE -o $(BIN)/$@
 
 
 clean:
