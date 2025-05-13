@@ -69,7 +69,7 @@
 #define PARAM_OMEGA                         	121
 #define PARAM_OMEGA_E                       	121
 #define PARAM_OMEGA_R                       	121
-#define PARAM_SECURITY                      	512
+#define PARAM_SECURITY                      	320
 #define PARAM_SECURITY_BYTES                  (PARAM_SECURITY/8)
 #define PARAM_DFR_EXP                       	192
 
