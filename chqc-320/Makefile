@@ -2,21 +2,21 @@ ifeq ($(ROOT),)
 ROOT:=.
 endif
 
-CPP=g++
+CC=gcc
 
-CPP_FLAGS:=-O3 -Wall -Wextra -Wpedantic -Wvla -Wredundant-decls 
+CFLAGS:=-O3 -Wall -Wextra -Wpedantic -Wvla -Wredundant-decls -std=c99
 
 SHA3_SRC:=$(ROOT)/lib/fips202/fips202.c
 SHA3_INCLUDE:=-I $(ROOT)/lib/fips202
 
 SRC:=$(ROOT)/src/
-INCLUDE:=-I $(ROOT)/src -lntl -lgf2x -lgmp -pthread
+INCLUDE:=-I $(ROOT)/src -pthread
 LIB:=$(SHA3_INCLUDE)
 
-MAIN_CHQC:=$(ROOT)/src/main_chqc.cpp
+MAIN_CHQC:=$(ROOT)/src/main_chqc.c
 MAIN_KAT:=$(ROOT)/src/main_kat.c
 
-CHQC_OBJS:=vector.o reed_muller.o reed_solomon.o fft.o gf.o gf2x.o code.o parsing.o chqc.o kem.o shake_ds.o shake_prng.o
+CHQC_OBJS:=vector.o reed_muller.o reed_solomon.o fft.o gf.o gf2x.o code.o parsing.o chqc.o kem.o shake_ds.o shake_prng.o toom.o toom-gpl.o
 CHQC_OBJS_VERBOSE:=vector.o reed_muller.o reed_solomon-verbose.o fft.o gf.o gf2x.o code-verbose.o parsing.o chqc-verbose.o kem-verbose.o shake_ds.o shake_prng.o
 LIB_OBJS:= fips202.o
 
@@ -30,19 +30,27 @@ folders:
 
 fips202.o: | folders
 	@/bin/echo -e "\n### Compiling fips202"
-	$(CPP) $(CFLAGS) -c $(SHA3_SRC) $(SHA3_INCLUDE) -o $(BUILD)/$@
+	$(CC) $(CFLAGS) -c $(SHA3_SRC) $(SHA3_INCLUDE) -o $(BUILD)/$@
+
+%.o: $(SRC)/%.c | folders
+	@/bin/echo -e "\n### Compiling $@"
+	$(CC) $(CFLAGS) -c $< $(INCLUDE) $(LIB) -o $(BUILD)/$@
 
 %.o: $(SRC)/%.cpp | folders
-	@/bin/echo -e "\n### Compiling $@"
+	@/bin/echo -e "\n### Compiling $@ (C++)"
 	$(CPP) $(CPP_FLAGS) -c $< $(INCLUDE) $(LIB) -o $(BUILD)/$@
 
-%-verbose.o: $(SRC)/%.cpp | folders
+%-verbose.o: $(SRC)/%.c | folders
 	@echo -e "\n### Compiling $@ (verbose mode)\n"
+	$(CC) $(CFLAGS) -c $< $(INCLUDE) $(LIB) -D VERBOSE -o $(BUILD)/$@
+
+%-verbose.o: $(SRC)/%.cpp | folders
+	@echo -e "\n### Compiling $@ (verbose C++)\n"
 	$(CPP) $(CPP_FLAGS) -c $< $(INCLUDE) $(LIB) -D VERBOSE -o $(BUILD)/$@
 
 chqc-320: $(CHQC_OBJS) $(LIB_OBJS) | folders
 	@echo -e "\n### Compiling chqc-320\n"
-	$(CPP) $(CPP_FLAGS) $(MAIN_CHQC) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -o $(BIN)/$@
+	$(CC) $(C_FLAGS) $(MAIN_CHQC) $(addprefix $(BUILD)/, $^) $(INCLUDE) $(LIB) -o $(BIN)/$@
 
 chqc-320-kat: $(CHQC_OBJS) $(LIB_OBJS) | folders
 	@echo -e "\n### Compiling chqc-320 KAT\n"

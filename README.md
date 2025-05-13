@@ -3,7 +3,6 @@
 
 
 ```
-
 *********************
 **** CHQC-320-192 ****
 *********************
@@ -18,20 +17,21 @@ SALT_SIZE_64: 4   COMPRESSED_VEC_N_SIZE_64: 986   COMPRESSED_VEC_N1N2_SIZE_64: 9
 COMPRESSED_VEC_N_SIZE_BYTES: 7888   COMPRESSED_VEC_N1N2_SIZE_BYTES: 7880   
 CRYPTO_PUBLICKEYBYTES: 8069   CRYPTO_SECRETKEYBYTES: 8173   CRYPTO_CIPHERTEXTBYTES: 15800   
 
-Single run keypair generation time: 0.91 ms
-Single run encryption time: 3.86 ms
-Single run decryption time: 6.49 ms
+Single run keypair generation time: 1.12 ms
+Single run encryption time: 4.07 ms
+Single run decryption time: 6.81 ms
 
 Average times after 100 iterations:
-Keypair generation: 0.88 ms
-Encryption: 3.86 ms
-Decryption: 6.51 ms
+Keypair generation: 0.97 ms
+Encryption: 4.13 ms
+Decryption: 6.90 ms
 
 
 secret1: c4519bf0f261f12d94606dd03028d8477f791f2d1629c5ee8ec45018358be18c90cbdf9f053d7c43e4bd36ac25aa0a87df7f9dbbf5b9ab6456ce25ee
 secret2: c4519bf0f261f12d94606dd03028d8477f791f2d1629c5ee8ec45018358be18c90cbdf9f053d7c43e4bd36ac25aa0a87df7f9dbbf5b9ab6456ce25ee
 
 YES
+
 ```
 
 ```
@@ -49,18 +49,19 @@ SALT_SIZE_64: 4   COMPRESSED_VEC_N_SIZE_64: 1384   COMPRESSED_VEC_N1N2_SIZE_64: 
 COMPRESSED_VEC_N_SIZE_BYTES: 11072   COMPRESSED_VEC_N1N2_SIZE_BYTES: 11032   
 CRYPTO_PUBLICKEYBYTES: 11304   CRYPTO_SECRETKEYBYTES: 11432   CRYPTO_CIPHERTEXTBYTES: 22136   
 
-Single run keypair generation time: 1.96 ms
-Single run encryption time: 6.59 ms
-Single run decryption time: 13.69 ms
+Single run keypair generation time: 2.11 ms
+Single run encryption time: 6.72 ms
+Single run decryption time: 13.41 ms
 
 Average times after 100 iterations:
-Keypair generation: 1.82 ms
-Encryption: 6.58 ms
-Decryption: 10.84 ms
+Keypair generation: 1.92 ms
+Encryption: 6.77 ms
+Decryption: 11.24 ms
 
 
 secret1: 29379d8b188cf127a9b9372078ed42ea41a6bbd0497de1eedea4a55838901fcb2cbfac715fc36699fffba3b53b25255f6a11eaf63946cd9256d6f658254bc
 secret2: 29379d8b188cf127a9b9372078ed42ea41a6bbd0497de1eedea4a55838901fcb2cbfac715fc36699fffba3b53b25255f6a11eaf63946cd9256d6f658254bc
 
 YES
+
 ```
