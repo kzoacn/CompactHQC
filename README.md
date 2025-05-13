@@ -49,14 +49,14 @@ SALT_SIZE_64: 4   COMPRESSED_VEC_N_SIZE_64: 1384   COMPRESSED_VEC_N1N2_SIZE_64: 
 COMPRESSED_VEC_N_SIZE_BYTES: 11072   COMPRESSED_VEC_N1N2_SIZE_BYTES: 11032   
 CRYPTO_PUBLICKEYBYTES: 11304   CRYPTO_SECRETKEYBYTES: 11432   CRYPTO_CIPHERTEXTBYTES: 22136   
 
-Single run keypair generation time: 2.11 ms
-Single run encryption time: 6.72 ms
-Single run decryption time: 13.41 ms
+Single run keypair generation time: 1.93 ms
+Single run encryption time: 6.69 ms
+Single run decryption time: 13.24 ms
 
 Average times after 100 iterations:
-Keypair generation: 1.92 ms
-Encryption: 6.77 ms
-Decryption: 11.24 ms
+Keypair generation: 1.91 ms
+Encryption: 6.76 ms
+Decryption: 11.17 ms
 
 
 secret1: 29379d8b188cf127a9b9372078ed42ea41a6bbd0497de1eedea4a55838901fcb2cbfac715fc36699fffba3b53b25255f6a11eaf63946cd9256d6f658254bc
