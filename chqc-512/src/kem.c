@@ -16,25 +16,6 @@
  #include <stdio.h>
  
  /**
-  * @brief Print uint64_t array in hexadecimal format
-  * 
-  * @param arr Pointer to uint64_t array
-  * @param size Number of elements in array
-  * @param label Optional label for the output
-  */
- 
- //#define VERBOSE
- static void print_uint64_array(const uint64_t *arr, size_t size, const char *label) {
-     if (label) {
-         printf("%s: ", label);
-     }
-     for (size_t i = 0; i < size; i++) {
-         printf("%016lx ", arr[i]);
-     }
-     printf("\n");
- } 
- 
- /**
   * @brief Keygen of the HQC_KEM IND_CAA2 scheme
   *
   * The public key is composed of the syndrome <b>s</b> as well as the seed used to generate the vector <b>h</b>.
@@ -198,4 +179,3 @@
  
      return (result & 1) - 1;
  }
- 

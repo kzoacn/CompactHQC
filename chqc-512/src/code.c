@@ -140,11 +140,10 @@ void hamming511_decode_to_code(uint64_t *corrected_codeword, const uint64_t *rec
         corrected_codeword[i] = received[i];
     }
 
-    uint32_t error_pos = locate_and_correct_error(corrected_codeword);
+    (void) locate_and_correct_error(corrected_codeword);
 
     #ifdef VERBOSE
-        printf("\n\nHamming(511,502) decode_to_code - error at position: %u", error_pos);
-        printf("\nCorrected codeword: ");
+        printf("\n\nHamming(511,502) decode_to_code corrected codeword: ");
         vect_print(corrected_codeword, 64);
     #endif
 }
