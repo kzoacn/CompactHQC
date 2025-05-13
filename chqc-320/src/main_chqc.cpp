@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "api.h"
 #include "parameters.h"
 #include "gf.h"
@@ -68,9 +69,52 @@ int main() {
 	unsigned char key1[SHARED_SECRET_BYTES];
 	unsigned char key2[SHARED_SECRET_BYTES];
 
+	clock_t start, end;
+	double keypair_time = 0, enc_time = 0, dec_time = 0;
+	const int iterations = 100;
+	
+	// Single run first
+	start = clock();
 	crypto_kem_keypair(pk, sk);
+	end = clock();
+	keypair_time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+	printf("\nSingle run keypair generation time: %.2f ms", keypair_time);
+	
+	start = clock();
 	crypto_kem_enc(ct, key1, pk);
+	end = clock();
+	enc_time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+	printf("\nSingle run encryption time: %.2f ms", enc_time);
+	
+	start = clock();
 	crypto_kem_dec(key2, ct, sk);
+	end = clock();
+	dec_time = ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+	printf("\nSingle run decryption time: %.2f ms\n", dec_time);
+	
+	// Run 100 times for average
+	keypair_time = enc_time = dec_time = 0;
+	for(int i = 0; i < iterations; i++) {
+		start = clock();
+		crypto_kem_keypair(pk, sk);
+		end = clock();
+		keypair_time += ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+		
+		start = clock();
+		crypto_kem_enc(ct, key1, pk);
+		end = clock();
+		enc_time += ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+		
+		start = clock();
+		crypto_kem_dec(key2, ct, sk);
+		end = clock();
+		dec_time += ((double) (end - start)) / CLOCKS_PER_SEC * 1000;
+	}
+	
+	printf("\nAverage times after %d iterations:", iterations);
+	printf("\nKeypair generation: %.2f ms", keypair_time/iterations);
+	printf("\nEncryption: %.2f ms", enc_time/iterations);
+	printf("\nDecryption: %.2f ms\n", dec_time/iterations);
 
 	printf("\n\nsecret1: ");
 	for(int i = 0 ; i < SHARED_SECRET_BYTES ; ++i) printf("%x", key1[i]);
@@ -91,8 +135,7 @@ int main() {
 	 }
 	puts("YES");
 
-
-	printf("parameters");
+ 
 
 	
 
