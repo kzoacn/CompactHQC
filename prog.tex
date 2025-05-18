@@ -1,0 +1,142 @@
+\documentclass[zihao=-4,fontset=fandol,linespread=1.5]{ctexart}
+\usepackage{pifont} % 提供\ding{72}五角星指令
+\usepackage{fancyhdr} % 自定义页眉页脚
+%\usepackage{geometry} % 调整页面边距
+%\geometry{left=2in, right=2in, top=2in, bottom=2in}
+\usepackage{zhlipsum}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    tabsize=4
+}
+\ctexset{section={
+format = \heiti\raggedright,
+format += \zihao{3},
+name={,、},
+number=\chinese{section},
+}
+}
+
+\pagestyle{plain} % 默认的其他页面样式为plain（无页眉）
+
+\begin{document}
+
+% 封面页
+\thispagestyle{fancy} % 仅对当前页启用自定义页眉
+\fancyhf{} % 清除默认设置
+\fancyhead[L]{} % 页眉左侧内容
+\fancyhead[R]{\heiti 内部\\ 页数: } % 页眉右侧内容
+\renewcommand{\headrulewidth}{0pt} % 隐藏页眉下的线
+\setlength{\headheight}{15pt}
+
+\vspace*{\fill} % 页面顶部留空，内容居中
+
+\begin{center}
+    \setlength{\lineskip}{1em} %\setlength的影响限于本地
+    {\zihao{1} \songti \bfseries {CompactHQC密码算法\\ C语言实现 \\ 1.0版本} } % 主标题
+\end{center}
+
+\vspace*{\fill} % 页面底部留空
+\vspace*{\fill} % 页面底部留空
+\vspace*{\fill} % 页面底部留空
+
+\begin{center}
+    {\zihao{3} \heiti 上海交通大学密码学实验室} \\ % 作者姓名
+    {\zihao{4} \heiti \today} % 作者单位
+\end{center}
+
+\renewcommand{\thepage}{---\arabic{page}---}
+
+\newpage % 新页开始
+
+\setcounter{page}{1}
+
+\tableofcontents
+\newpage
+
+% 后续页面内容
+
+\section{程序说明}
+
+CompactHQC实现包含两个安全级别版本（CHQC-320和CHQC-512），具有相同的文件结构,以chqc-512为例：
+
+\subsection{核心算法文件}
+\begin{itemize}
+    \item \texttt{src/chqc.[ch]} - 主算法实现
+    \item \texttt{src/kem.c} - 密钥封装机制
+    \item \texttt{src/parameters.h} - 算法参数配置
+\end{itemize}
+
+\subsection{数学运算模块}
+\begin{itemize}
+    \item \texttt{src/gf.[ch]} - 有限域运算
+    \item \texttt{src/gf2x.[ch]} - 二元多项式运算
+    \item \texttt{src/fft.[ch]} - 快速傅里叶变换
+    \item \texttt{src/toom.c} - Toom-Cook乘法
+    \item \texttt{src/toom-gpl.c} - GPL授权的Toom-Cook实现
+\end{itemize}
+
+\subsection{编码模块}  
+\begin{itemize}
+    \item \texttt{src/reed\_muller.[ch]} - Reed-Muller编码
+    \item \texttt{src/reed\_solomon.[ch]} - Reed-Solomon编码
+    \item \texttt{src/code.[ch]} - 编码接口
+\end{itemize}
+
+\subsection{辅助模块}
+\begin{itemize}
+    \item \texttt{src/vector.[ch]} - 向量操作
+    \item \texttt{src/parsing.[ch]} - 数据解析
+    \item \texttt{src/shake\_prng.[ch]} - 伪随机数生成
+    \item \texttt{src/shake\_ds.[ch]} - 确定性采样
+\end{itemize}
+
+\subsection{依赖库}
+\begin{itemize}
+    \item \texttt{lib/fips202/fips202.[ch]} - SHA-3哈希函数实现
+\end{itemize}
+
+\subsection{测试程序}
+\begin{itemize}
+    \item \texttt{src/main\_chqc.c} - 主测试程序 
+\end{itemize}
+
+\subsection{使用说明}
+\begin{enumerate}
+    \item 执行 \texttt{make chqc-512} 编译当前目录版本
+    \item 运行测试: \texttt{./bin/chqc-512}
+\end{enumerate}
+
+\section{模拟实现程序}
+
+\subsection{核心算法实现 (chqc.c)}
+\lstinputlisting[language=C]{chqc-512/src/chqc.c}
+
+\subsection{密钥封装机制 (kem.c)}
+\lstinputlisting[language=C]{chqc-512/src/kem.c}
+
+\subsection{有限域运算 (gf.c)}
+\lstinputlisting[language=C]{chqc-512/src/gf.c}
+
+\subsection{FFT实现 (fft.c)}
+\lstinputlisting[language=C]{chqc-512/src/fft.c}
+
+\subsection{Reed-Muller编码 (reed\_muller.c)}
+\lstinputlisting[language=C]{chqc-512/src/reed_muller.c}
+
+\section{算法样本数据}
+
+给出密码算法的输入/输出样本数据
+
+
+\end{document}
