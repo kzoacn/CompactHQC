@@ -3,7 +3,7 @@
  * @brief Implementation of hqc.h
  */
 
- #include "chqc.h"
+ #include "hxj.h"
  #include "gf2x.h"
  #include "parameters.h"
  #include "parsing.h"
@@ -27,7 +27,7 @@
   * @param[out] pk String containing the public key
   * @param[out] sk String containing the secret key
   */
- void chqc_pke_keygen(unsigned char* pk, unsigned char* sk) {
+ void hxj_pke_keygen(unsigned char* pk, unsigned char* sk) {
      seedexpander_state sk_seedexpander;
      seedexpander_state pk_seedexpander;
      uint8_t sk_seed[SEED_BYTES] = {0};
@@ -87,7 +87,7 @@
   * @param[in] theta Seed used to derive randomness required for encryption
   * @param[in] pk String containing the public key
   */
- void chqc_pke_encrypt(uint64_t *compressed_u, uint64_t *compressed_v, uint64_t *m, unsigned char *theta, const unsigned char *pk) {
+ void hxj_pke_encrypt(uint64_t *compressed_u, uint64_t *compressed_v, uint64_t *m, unsigned char *theta, const unsigned char *pk) {
      seedexpander_state seedexpander;
  
      uint64_t u[VEC_N_SIZE_64] = {0};
@@ -161,7 +161,7 @@
   * @param[in] sk String containing the secret key
   * @returns 0 
   */
- uint8_t chqc_pke_decrypt(uint64_t *m, uint8_t *sigma, const uint64_t *u, const uint64_t *v, const uint8_t *sk) {
+ uint8_t hxj_pke_decrypt(uint64_t *m, uint8_t *sigma, const uint64_t *u, const uint64_t *v, const uint8_t *sk) {
      uint64_t y[VEC_N_SIZE_64] = {0};
      uint8_t pk[PUBLIC_KEY_BYTES] = {0};
      uint64_t tmp1[VEC_N_SIZE_64] = {0};

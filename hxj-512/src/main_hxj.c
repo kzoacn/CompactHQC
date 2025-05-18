@@ -9,7 +9,7 @@ int main() {
 
 	printf("\n");
 	printf("*********************\n");
-	printf("**** CHQC-%d-%d ****\n", PARAM_SECURITY, PARAM_DFR_EXP);
+	printf("**** HXJ-%d-%d ****\n", PARAM_SECURITY, PARAM_DFR_EXP);
 	printf("*********************\n");
 
 	printf("\n");

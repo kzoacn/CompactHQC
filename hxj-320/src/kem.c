@@ -4,7 +4,7 @@
  */
 
  #include "api.h"
- #include "chqc.h"
+ #include "hxj.h"
  #include "parameters.h"
  #include "parsing.h"
  #include "shake_ds.h"

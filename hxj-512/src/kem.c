@@ -4,7 +4,7 @@
  */
 
  #include "api.h"
- #include "chqc.h"
+ #include "hxj.h"
  #include "parameters.h"
  #include "parsing.h"
  #include "shake_ds.h"
@@ -29,7 +29,7 @@
   */
  int crypto_kem_keypair(unsigned char *pk, unsigned char *sk) {
  
-     chqc_pke_keygen(pk, sk);
+     hxj_pke_keygen(pk, sk);
      return 0;
  }
  
@@ -72,7 +72,7 @@
  
  
      // Encrypting m
-     chqc_pke_encrypt(u, v, (uint64_t *)m, theta, pk);
+     hxj_pke_encrypt(u, v, (uint64_t *)m, theta, pk);
      
  
  
@@ -137,7 +137,7 @@
      memcpy(pk, sk + SEED_BYTES + PARAM_SECURITY_BYTES, PUBLIC_KEY_BYTES);
  
      // Decrypting
-     result = chqc_pke_decrypt((uint64_t *)m, sigma, u, v, sk);
+     result = hxj_pke_decrypt((uint64_t *)m, sigma, u, v, sk);
  
      // Computing theta
      memcpy(tmp, m, VEC_K_SIZE_BYTES);
@@ -146,7 +146,7 @@
      shake256_512_ds(&shake256state, theta, tmp, VEC_K_SIZE_BYTES + (SALT_SIZE_BYTES * 2) + SALT_SIZE_BYTES, G_FCT_DOMAIN);
  
      // Encrypting m'
-     chqc_pke_encrypt(u2, v2, (uint64_t *)m, theta, pk);
+     hxj_pke_encrypt(u2, v2, (uint64_t *)m, theta, pk);
  
      // Check if c != c'
      result |= vect_compare((uint8_t *)u, (uint8_t *)u2, COMPRESSED_VEC_N_SIZE_BYTES);

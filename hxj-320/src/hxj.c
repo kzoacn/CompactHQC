@@ -3,7 +3,7 @@
  * @brief Implementation of hqc.h
  */
 
- #include "chqc.h"
+ #include "hxj.h"
  #include "gf2x.h"
  #include "parameters.h"
  #include "parsing.h"
