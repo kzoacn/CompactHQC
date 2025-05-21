@@ -70,7 +70,7 @@ void compute_generator_poly(uint16_t* poly) {
 
     //printf("\n");
     //for (int i = 0; i < (PARAM_G); ++i) {
-    //    printf("%dx^{%d} + ",poly[i],i);
+    //    printf("%d,  ",poly[i]);
     //}
     //printf("\n");
 }
