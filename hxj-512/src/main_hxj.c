@@ -4,64 +4,69 @@
 #include "parameters.h"
 #include "gf.h"
 #include "reed_solomon.h"
+#include <string.h>
 
-int main() {
+void print_parameters() {
+    printf("\n");
+    printf("*********************\n");
+    printf("**** HXJ-%d-%d ****\n", PARAM_SECURITY, PARAM_DFR_EXP);
+    printf("*********************\n");
 
-	printf("\n");
-	printf("*********************\n");
-	printf("**** HXJ-%d-%d ****\n", PARAM_SECURITY, PARAM_DFR_EXP);
-	printf("*********************\n");
+    printf("\n");
+    printf("N: %d   ", PARAM_N);
+    printf("N1: %d   ", PARAM_N1);
+    printf("N2: %d   ", PARAM_N2);
+    printf("OMEGA: %d   ", PARAM_OMEGA);
+    printf("OMEGA_R: %d   ", PARAM_OMEGA_R);
+    printf("Failure rate: 2^-%d   ", PARAM_DFR_EXP);
+    printf("Sec: %d bits", PARAM_SECURITY);
+    printf("\n");
 
-	printf("\n");
-	printf("N: %d   ", PARAM_N);
-	printf("N1: %d   ", PARAM_N1);
-	printf("N2: %d   ", PARAM_N2);
-	printf("OMEGA: %d   ", PARAM_OMEGA);
-	printf("OMEGA_R: %d   ", PARAM_OMEGA_R);
-	printf("Failure rate: 2^-%d   ", PARAM_DFR_EXP);
-	printf("Sec: %d bits", PARAM_SECURITY);
-	printf("\n");
+    printf("OMEGA_E: %d   ", PARAM_OMEGA_E);
+    printf("Security bytes: %d   ", PARAM_SECURITY_BYTES);
+    printf("M: %d   ", PARAM_M);
+    printf("GF_POLY: 0x%X   ", PARAM_GF_POLY);
+    printf("K: %d   ", PARAM_K);
+    printf("G: %d   ", PARAM_G);
+    printf("FFT: %d   ", PARAM_FFT);
+    printf("\n");
+    printf("DELTA: %d   ", PARAM_DELTA);
+    printf("GF_POLY_WT: %d   ", PARAM_GF_POLY_WT);
+    printf("GF_POLY_M2: %d   ", PARAM_GF_POLY_M2);
+    printf("GF_MUL_ORDER: %d   ", PARAM_GF_MUL_ORDER);
+    printf("\n");
+    printf("VEC_N_SIZE_BYTES: %d   ", VEC_N_SIZE_BYTES);
+    printf("VEC_K_SIZE_BYTES: %d   ", VEC_K_SIZE_BYTES);
+    printf("VEC_N1_SIZE_BYTES: %d   ", VEC_N1_SIZE_BYTES);
+    printf("VEC_N1N2_SIZE_BYTES: %d   ", VEC_N1N2_SIZE_BYTES);
+    printf("\n");
+    printf("VEC_N_SIZE_64: %d   ", VEC_N_SIZE_64);
+    printf("VEC_K_SIZE_64: %d   ", VEC_K_SIZE_64);
+    printf("VEC_N1_SIZE_64: %d   ", VEC_N1_SIZE_64);
+    printf("VEC_N1N2_SIZE_64: %d   ", VEC_N1N2_SIZE_64);
+    printf("\n");
+    printf("RED_MASK: 0x%lX   ", RED_MASK);
+    printf("SHAKE256_512_BYTES: %d   ", SHAKE256_512_BYTES);
+    printf("SEED_BYTES: %d   ", SEED_BYTES);
+    printf("SALT_SIZE_BYTES: %d   ", SALT_SIZE_BYTES);
+    printf("\n");
+    printf("SALT_SIZE_64: %d   ", SALT_SIZE_64);
+    printf("COMPRESSED_VEC_N_SIZE_64: %d   ", COMPRESSED_VEC_N_SIZE_64);
+    printf("COMPRESSED_VEC_N1N2_SIZE_64: %d   ", COMPRESSED_VEC_N1N2_SIZE_64);
+    printf("\n");
+    printf("COMPRESSED_VEC_N_SIZE_BYTES: %d   ", COMPRESSED_VEC_N_SIZE_BYTES);
+    printf("COMPRESSED_VEC_N1N2_SIZE_BYTES: %d   ", COMPRESSED_VEC_N1N2_SIZE_BYTES);
+    printf("\n");
 
-	printf("OMEGA_E: %d   ", PARAM_OMEGA_E);
-	printf("Security bytes: %d   ", PARAM_SECURITY_BYTES);
-	printf("M: %d   ", PARAM_M);
-	printf("GF_POLY: 0x%X   ", PARAM_GF_POLY);
-	printf("K: %d   ", PARAM_K);
-	printf("G: %d   ", PARAM_G);
-	printf("FFT: %d   ", PARAM_FFT);
-	printf("\n");
-	printf("DELTA: %d   ", PARAM_DELTA);
-	printf("GF_POLY_WT: %d   ", PARAM_GF_POLY_WT);
-	printf("GF_POLY_M2: %d   ", PARAM_GF_POLY_M2);
-	printf("GF_MUL_ORDER: %d   ", PARAM_GF_MUL_ORDER);
-	printf("\n");
-	printf("VEC_N_SIZE_BYTES: %d   ", VEC_N_SIZE_BYTES);
-	printf("VEC_K_SIZE_BYTES: %d   ", VEC_K_SIZE_BYTES);
-	printf("VEC_N1_SIZE_BYTES: %d   ", VEC_N1_SIZE_BYTES);
-	printf("VEC_N1N2_SIZE_BYTES: %d   ", VEC_N1N2_SIZE_BYTES);
-	printf("\n");
-	printf("VEC_N_SIZE_64: %d   ", VEC_N_SIZE_64);
-	printf("VEC_K_SIZE_64: %d   ", VEC_K_SIZE_64);
-	printf("VEC_N1_SIZE_64: %d   ", VEC_N1_SIZE_64);
-	printf("VEC_N1N2_SIZE_64: %d   ", VEC_N1N2_SIZE_64);
-	printf("\n");
-	printf("RED_MASK: 0x%lX   ", RED_MASK);
-	printf("SHAKE256_512_BYTES: %d   ", SHAKE256_512_BYTES);
-	printf("SEED_BYTES: %d   ", SEED_BYTES);
-	printf("SALT_SIZE_BYTES: %d   ", SALT_SIZE_BYTES);
-	printf("\n");
-	printf("SALT_SIZE_64: %d   ", SALT_SIZE_64);
-	printf("COMPRESSED_VEC_N_SIZE_64: %d   ", COMPRESSED_VEC_N_SIZE_64);
-	printf("COMPRESSED_VEC_N1N2_SIZE_64: %d   ", COMPRESSED_VEC_N1N2_SIZE_64);
-	printf("\n");
-	printf("COMPRESSED_VEC_N_SIZE_BYTES: %d   ", COMPRESSED_VEC_N_SIZE_BYTES);
-	printf("COMPRESSED_VEC_N1N2_SIZE_BYTES: %d   ", COMPRESSED_VEC_N1N2_SIZE_BYTES);
-	printf("\n");
+    printf("CRYPTO_PUBLICKEYBYTES: %d   ", CRYPTO_PUBLICKEYBYTES);
+    printf("CRYPTO_SECRETKEYBYTES: %d   ", CRYPTO_SECRETKEYBYTES);
+    printf("CRYPTO_CIPHERTEXTBYTES: %d   ", CRYPTO_CIPHERTEXTBYTES);
+    printf("\n");
+}
 
-	printf("CRYPTO_PUBLICKEYBYTES: %d   ", CRYPTO_PUBLICKEYBYTES);
-	printf("CRYPTO_SECRETKEYBYTES: %d   ", CRYPTO_SECRETKEYBYTES);
-	printf("CRYPTO_CIPHERTEXTBYTES: %d   ", CRYPTO_CIPHERTEXTBYTES);
-	printf("\n");
+
+void test_kem(){
+
 
 	unsigned char pk[PUBLIC_KEY_BYTES];
 	unsigned char sk[SECRET_KEY_BYTES];
@@ -123,22 +128,100 @@ int main() {
 	for(int i = 0 ; i < SHARED_SECRET_BYTES ; ++i) printf("%x", key2[i]);
 	printf("\n\n");
 
-	//printf("pk size %d\n",SEED_BYTES + VEC_N_SIZE_BYTES);
-	//printf("sk size %d\n",SEED_BYTES + PARAM_SECURITY_BYTES + (SEED_BYTES + VEC_N_SIZE_BYTES));
-	//printf("ct size %d\n",VEC_N_SIZE_BYTES + VEC_N1N2_SIZE_BYTES + SALT_SIZE_BYTES);
-	
 
 	for(int i = 0 ; i < SHARED_SECRET_BYTES ; ++i) 
 	 if(key1[i]!=key2[i]){
 		puts("NO!!!!!!!!!!!!!!");
-		return 0;
+		return ;
 	 }
 	puts("YES");
 
- 
+}
 
+void test_ccapke(){
+
+
+	// CCAPKE Test
+	printf("\n\n=== CCAPKE Test ===\n");
 	
+	unsigned char ccapke_pk[PUBLIC_KEY_BYTES];
+	unsigned char ccapke_sk[SECRET_KEY_BYTES];
+	unsigned char ccapke_ct[CIPHERTEXT_BYTES];
+	unsigned char ccapke_ct_dem[DEM_CT_SIZE];
+	unsigned char ccapke_iv[DEM_IV_SIZE] = {0};
+	unsigned char ccapke_tag[DEM_TAG_SIZE];
+	unsigned char test_msg[DEM_MSG_SIZE] = {0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF};
+	unsigned char decrypted_msg[DEM_MSG_SIZE];
+	
+	// Key generation
+	clock_t start = clock();
+	crypto_ccapke_keypair(ccapke_pk, ccapke_sk);
+	clock_t end = clock();
+	printf("CCAPKE Keypair time: %.2f ms\n", ((double)(end-start))/CLOCKS_PER_SEC*1000);
+	
+	// Encryption
+	start = clock();
+	crypto_ccapke_enc(ccapke_ct, ccapke_ct_dem, ccapke_iv, ccapke_tag, ccapke_pk, test_msg);
+	end = clock();
+	printf("CCAPKE Encryption time: %.2f ms\n", ((double)(end-start))/CLOCKS_PER_SEC*1000);
+	
+	//puts("MID");
+	//for(int i=0;i<DEM_IV_SIZE;i++)printf("%d",ccapke_iv[i]);puts("");
 
+	// Decryption
+	start = clock();
+	int dec_result = crypto_ccapke_dec(decrypted_msg, ccapke_ct, ccapke_ct_dem, ccapke_iv, ccapke_tag, ccapke_sk);
+	end = clock();
+	printf("CCAPKE Decryption time: %.2f ms\n", ((double)(end-start))/CLOCKS_PER_SEC*1000);
+	
+	// Verify
+	printf("\nOriginal message: ");
+	for(int i=0; i<DEM_MSG_SIZE; i++) printf("%02X", test_msg[i]);
+	
+	printf("\nDecrypted message: ");
+	for(int i=0; i<DEM_MSG_SIZE; i++) printf("%02X", decrypted_msg[i]);
+	
+	if(memcmp(test_msg, decrypted_msg, DEM_MSG_SIZE) == 0) {
+		printf("\nCCAPKE Test: SUCCESS\n");
+	} else {
+		printf("\nCCAPKE Test: FAILED\n");
+	}
 
-	return 0;
+}
+
+void test_ake() {
+    printf("\n\n=== AKE Test ===\n");
+    
+    uint8_t K_alice[SHARED_SECRET_BYTES];
+    uint8_t K_bob[SHARED_SECRET_BYTES];
+    
+    clock_t start = clock();
+    hxj_ake_protocol(K_alice, K_bob);
+    clock_t end = clock();
+    
+    printf("AKE Protocol time: %.2f ms\n", ((double)(end-start))/CLOCKS_PER_SEC*1000);
+    
+    printf("\nAlice's key: ");
+    for(int i=0; i<8; i++) printf("%02X", K_alice[i]);
+    printf("...");
+    
+    printf("\nBob's key: ");
+    for(int i=0; i<8; i++) printf("%02X", K_bob[i]);
+    printf("...\n");
+    
+    if(memcmp(K_alice, K_bob, SHARED_SECRET_BYTES) == 0) {
+        printf("AKE Test: SUCCESS\n");
+    } else {
+        printf("AKE Test: FAILED\n");
+    }
+}
+
+int main() {
+    print_parameters();
+
+    test_kem();
+    test_ccapke();
+    test_ake();
+    
+    return 0;
 }
