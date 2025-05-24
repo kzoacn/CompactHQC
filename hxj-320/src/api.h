@@ -25,4 +25,14 @@ int crypto_kem_keypair(unsigned char* pk, unsigned char* sk);
 int crypto_kem_enc(unsigned char* ct, unsigned char* ss, const unsigned char* pk);
 int crypto_kem_dec(unsigned char* ss, const unsigned char* ct, const unsigned char* sk);
 
+
+int crypto_dem_encaps(const unsigned char *sk,const unsigned char *m,unsigned char *ct,unsigned char *iv,unsigned char *tag);
+int crypto_dem_decaps(const unsigned char *sk,const unsigned char *ct,const unsigned char *iv,const unsigned char *tag, unsigned char *m);
+
+
+
+int crypto_ccapke_keypair(unsigned char* pk, unsigned char* sk);
+int crypto_ccapke_enc(unsigned char* ct, unsigned char* ss, const unsigned char* pk);
+int crypto_ccapke_dec(unsigned char* ss, const unsigned char* ct, const unsigned char* sk);
+
 #endif
