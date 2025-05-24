@@ -41,4 +41,6 @@ int crypto_ccapke_dec(unsigned char *m,
                      const unsigned char *iv, const unsigned char *tag,
                      const unsigned char *sk);
 
+void hxj_ake_protocol(unsigned char *K_alice, unsigned char *K_bob);
+
 #endif

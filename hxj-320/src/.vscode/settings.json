@@ -3,6 +3,8 @@
         "aes-gcm.h": "c",
         "parameters.h": "c",
         "parsing.h": "c",
-        "api.h": "c"
+        "api.h": "c",
+        "shake_ds.h": "c",
+        "shake_prng.h": "c"
     }
 }

@@ -189,12 +189,39 @@ void test_ccapke(){
 
 }
 
+void test_ake() {
+    printf("\n\n=== AKE Test ===\n");
+    
+    uint8_t K_alice[SHARED_SECRET_BYTES];
+    uint8_t K_bob[SHARED_SECRET_BYTES];
+    
+    clock_t start = clock();
+    hxj_ake_protocol(K_alice, K_bob);
+    clock_t end = clock();
+    
+    printf("AKE Protocol time: %.2f ms\n", ((double)(end-start))/CLOCKS_PER_SEC*1000);
+    
+    printf("\nAlice's key: ");
+    for(int i=0; i<8; i++) printf("%02X", K_alice[i]);
+    printf("...");
+    
+    printf("\nBob's key: ");
+    for(int i=0; i<8; i++) printf("%02X", K_bob[i]);
+    printf("...\n");
+    
+    if(memcmp(K_alice, K_bob, SHARED_SECRET_BYTES) == 0) {
+        printf("AKE Test: SUCCESS\n");
+    } else {
+        printf("AKE Test: FAILED\n");
+    }
+}
+
 int main() {
     print_parameters();
 
-	test_kem();
-
-	test_ccapke();
-	
-	return 0;
+    test_kem();
+    test_ccapke();
+    test_ake();
+    
+    return 0;
 }
