@@ -62,25 +62,25 @@
 
 
 
-#define PARAM_N																89917
-#define PARAM_N1                            	140
+#define PARAM_N																92173
+#define PARAM_N1                            	144
 #define PARAM_N2                            	640
 #define PARAM_N1N2                          	(PARAM_N1*PARAM_N2)
-#define PARAM_OMEGA                         	175
-#define PARAM_OMEGA_E                       	175
-#define PARAM_OMEGA_R                       	175
+#define PARAM_OMEGA                         	180
+#define PARAM_OMEGA_E                       	180
+#define PARAM_OMEGA_R                       	180
 #define PARAM_SECURITY                      	512
 #define PARAM_SECURITY_BYTES                  (PARAM_SECURITY/8)
 #define PARAM_DFR_EXP                       	192
 
 
-#define PARAM_DELTA                         	38
+#define PARAM_DELTA                         	39
 #define PARAM_M                            		8
 #define PARAM_GF_POLY                       	0x11D
 #define PARAM_GF_POLY_WT                      5
 #define PARAM_GF_POLY_M2                        4
 #define PARAM_GF_MUL_ORDER                  	255
-#define PARAM_K                             	64
+#define PARAM_K                             	66
 #define PARAM_G                             	(2*PARAM_DELTA+1)
 #define PARAM_FFT                           	5
 
