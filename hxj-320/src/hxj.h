@@ -8,8 +8,8 @@
 
 #include <stdint.h>
 
-void chqc_pke_keygen(unsigned char* pk, unsigned char* sk);
-void chqc_pke_encrypt(uint64_t *u, uint64_t *v, uint64_t *m, unsigned char *theta, const unsigned char *pk);
-uint8_t chqc_pke_decrypt(uint64_t *m, uint8_t *sigma, const uint64_t *u, const uint64_t *v, const uint8_t *sk);
+void hxj_pke_keygen(unsigned char* pk, unsigned char* sk);
+void hxj_pke_encrypt(uint64_t *u, uint64_t *v, uint64_t *m, unsigned char *theta, const unsigned char *pk);
+uint8_t hxj_pke_decrypt(uint64_t *m, uint8_t *sigma, const uint64_t *u, const uint64_t *v, const uint8_t *sk);
 
 #endif
