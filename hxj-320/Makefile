@@ -16,7 +16,7 @@ LIB:=$(SHA3_INCLUDE)
 MAIN_HXJ:=$(ROOT)/src/main_hxj.c
 MAIN_KAT:=$(ROOT)/src/main_kat.c
 
-HXJ_OBJS:=aes.o aes-gcm.o vector.o reed_muller.o reed_solomon.o fft.o gf.o gf2x.o code.o parsing.o hxj.o kem.o dem.o shake_ds.o shake_prng.o toom.o toom-gpl.o
+HXJ_OBJS:=aes.o aes-gcm.o vector.o reed_muller.o reed_solomon.o fft.o gf.o gf2x.o code.o parsing.o hxj.o kem.o dem.o shake_ds.o shake_prng.o toom.o toom-gpl.o ccapke.o
 HXJ_OBJS_VERBOSE:=vector.o reed_muller.o reed_solomon-verbose.o fft.o gf.o gf2x.o code-verbose.o parsing.o hxj-verbose.o kem-verbose.o shake_ds.o shake_prng.o
 LIB_OBJS:= fips202.o
 

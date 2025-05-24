@@ -125,9 +125,9 @@
 
 // DEM parameters
 #define DEM_KEY_SIZE 32  // 256-bit key
-#define DEM_MSG_SIZE 32  // 256-bit message
-#define DEM_CT_SIZE  12  // 96-bit ciphertext
-#define DEM_IV_SIZE  12  // 96-bit IV
-#define DEM_TAG_SIZE 12  // 96-bit tag
+#define DEM_MSG_SIZE 32  
+#define DEM_CT_SIZE  32  
+#define DEM_IV_SIZE  12  
+#define DEM_TAG_SIZE 12  
 
 #endif

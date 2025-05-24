@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "aes-gcm.h": "c",
-        "parameters.h": "c"
+        "parameters.h": "c",
+        "parsing.h": "c",
+        "api.h": "c"
     }
 }

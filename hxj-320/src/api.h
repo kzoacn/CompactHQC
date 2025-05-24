@@ -31,8 +31,14 @@ int crypto_dem_decaps(const unsigned char *sk,const unsigned char *ct,const unsi
 
 
 
-int crypto_ccapke_keypair(unsigned char* pk, unsigned char* sk);
-int crypto_ccapke_enc(unsigned char* ct, unsigned char* ss, const unsigned char* pk);
-int crypto_ccapke_dec(unsigned char* ss, const unsigned char* ct, const unsigned char* sk);
+int crypto_ccapke_keypair(unsigned char *pk, unsigned char *sk);
+int crypto_ccapke_enc(unsigned char *ct, unsigned char *ct_dem,
+                     unsigned char *iv, unsigned char *tag,
+                     const unsigned char *pk, const unsigned char *m);
+
+int crypto_ccapke_dec(unsigned char *m,
+                     const unsigned char *ct, const unsigned char *ct_dem,
+                     const unsigned char *iv, const unsigned char *tag,
+                     const unsigned char *sk);
 
 #endif
