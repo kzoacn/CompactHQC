@@ -1,45 +1,18 @@
-/* This file is part of the gf2x library.
 
-   Copyright 2007, 2008, 2009, 2010, 2013, 2015
-   Richard Brent, Pierrick Gaudry, Emmanuel Thome', Paul Zimmermann
-
-   This program is free software; you can redistribute it and/or modify it
-   under the terms of either:
-    - If the archive contains a file named toom-gpl.c (not a trivial
-    placeholder), the GNU General Public License as published by the Free
-    Software Foundation; either version 3 of the License, or (at your
-    option) any later version.
-    - If the archive contains a file named toom-gpl.c which is a trivial
-    placeholder, the GNU Lesser General Public License as published by
-    the Free Software Foundation; either version 2.1 of the License, or
-    (at your option) any later version.
-   
-   This program is distributed in the hope that it will be useful, but WITHOUT
-   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-   FITNESS FOR A PARTICULAR PURPOSE.  See the license text for more details.
-   
-   You should have received a copy of the GNU General Public License as
-   well as the GNU Lesser General Public License along with this program;
-   see the files COPYING and COPYING.LIB.  If not, write to the Free
-   Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-   02110-1301, USA.
-*/
 
 #ifndef GF2X_IMPL_H_
 #define GF2X_IMPL_H_
 
 #include "gf2x.h"
-/* first include the stuff that even users of the library have access to */
+
 #include "gf2x/gf2x-impl-export.h"
 
-/* then proceed to the really internal stuff */
+
 #include "gf2x/gf2x-config.h"
 #include "gf2x/gf2x-thresholds.h"
 
-/* These flags are for internal use. When a new routine is added, don't
-   change the flags, otherwise the tuning in the already_tuned directory
-   will become invalid. */
-#define	GF2X_SELECT_KARA	0	/* do not change ! */
+
+#define	GF2X_SELECT_KARA	0	
 #define	GF2X_SELECT_TC3		1
 #define	GF2X_SELECT_TC3W	2
 #define	GF2X_SELECT_TC4		3
@@ -47,19 +20,16 @@
 #define	GF2X_SELECT_TC3X	5
 
 #define	GF2X_SELECT_UNB_DFLT	0
-#define	GF2X_SELECT_UNB_TC3U	1	/* do not change ! */
+#define	GF2X_SELECT_UNB_TC3U	1	
 
 #include <assert.h>
 #ifndef ASSERT
 #define ASSERT(x)	assert(x)
 #endif
 
-/* We use it for internal checking of the proper propagation of errors.
- */
+
 #ifndef GF2X_ATTRIBUTE_WARN_UNUSED_RESULT
-/* https://gcc.gnu.org/onlinedocs/gcc-3.3.6/gcc/Function-Attributes.html#Function-Attributes
- * https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gcc/Function-Attributes.html#Function-Attributes
- */
+
 #ifndef GF2X_GNUC_VERSION_ATLEAST
 #define GF2X_LEXGE2(X,Y,A,B) (X>A || (X == A && Y >= B))
 #define GF2X_LEXGE3(X,Y,Z,A,B,C) (X>A || (X == A && GF2X_LEXGE2(Y,Z,B,C)))
@@ -97,10 +67,10 @@ extern void gf2x_mul_basecase_inner(unsigned long * c, const unsigned long * a,
 #define gf2x_is_static_true(x) (__builtin_constant_p((x)) && (x))
 #define gf2x_static_assert(name, x) char name[gf2x_is_static_true(x)] GF2X_MAYBE_UNUSED
 #else
-#define gf2x_static_assert(name, x) /**/
+#define gf2x_static_assert(name, x) 
 #endif
 #define gf2x_mul_basecase(c,a,na,b,nb) do {			        \
-    if (MAX(na, nb) >= GF2X_MUL_KARA_THRESHOLD) { /* static assert replacement */ \
+    if (MAX(na, nb) >= GF2X_MUL_KARA_THRESHOLD) {  \
         fprintf(stderr, "Error: MAX(%ld,%ld) >= %d\n", na, nb, GF2X_MUL_KARA_THRESHOLD); \
         abort(); \
     } \
@@ -125,18 +95,16 @@ extern void gf2x_mul_tc4(unsigned long *c, const unsigned long *a, const unsigne
 			long n, unsigned long *stk);
 extern void gf2x_mul_tc3u(unsigned long * c, const unsigned long * a, long sa,
 	      const unsigned long * b, unsigned long * stk);
-#endif /* GPL_CODE_PRESENT */
+#endif 
 
 extern short gf2x_best_toom(unsigned long);
 
 extern short gf2x_best_utoom(unsigned long);
 
 
-/* gf2x_mul_fft returns 0 on success, and a negative error
- * code among the GF2X_ERROR_* constants defined in gf2x.h.
- */
 
-//#include "gf2x-ternary-fft.h"
+
+
 
 #define GF2X_MUL_FFT_MINIMUM_SIZE GF2X_TERNARY_FFT_MINIMUM_SIZE
 
@@ -145,9 +113,7 @@ extern int gf2x_mul_fft(unsigned long *c, const unsigned long *a, size_t an,
                         GF2X_ATTRIBUTE_WARN_UNUSED_RESULT;
 
 
-/* tunetoom.c need to poke into toom.c's tables ; that's very ugly. So
- * please don't use for anything else.
- * */
+
 extern short best_tab[GF2X_TOOM_TUNING_LIMIT];
 extern short best_utab[GF2X_TOOM_TUNING_LIMIT];
 
@@ -155,4 +121,4 @@ extern short best_utab[GF2X_TOOM_TUNING_LIMIT];
 }
 #endif
 
-#endif	/* GF2X_IMPL_H_ */
+#endif	

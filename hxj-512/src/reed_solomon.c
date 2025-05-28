@@ -380,7 +380,7 @@ static void correct_errors(uint8_t *cdw, const uint16_t *error_values) {
 void reed_solomon_decode(uint64_t *msg, uint64_t *cdw) {
     uint8_t cdw_bytes[PARAM_N1] = {0};
     uint16_t syndromes[2 * PARAM_DELTA] = {0};
-    uint16_t sigma[PARAM_DELTA + 1] = {0};
+    uint16_t sigma[PARAM_DELTA*2 + 1] = {0};
     uint8_t error[1 << PARAM_M] = {0};
     uint16_t z[PARAM_N1] = {0};
     uint16_t error_values[PARAM_N1] = {0};
